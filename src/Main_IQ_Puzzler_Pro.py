@@ -1,3 +1,4 @@
+
 from tkinter import *
 import numpy as np
 from Classe_piece import *
@@ -6,17 +7,25 @@ from initialisation import *
 
 #remet les pieces a leurs position initial 
 def reset(list_piece):
-    for i in list_piece:
-        if not i.bloq:
-            i.place_init()
+    for piece in list_piece:
+        if not piece.isLock:
+            piece.place_init()
 
 
 def main():
 
-    nbNiv=int(input("Quel niveau:"))
+    try:
+        while True:
+            nbNiv=int(input("Quel niveau:"))
+            if nbNiv < 4:
+                break
+            print("Le numéro du niveau doit etre comprise entre 0 et 3")
+
+    except ValueError:
+        nbNiv=0
     #initialisation de la fenetre TKinter
     fen=Tk()
-    fen.wm_state(newstate="zoomed")
+    fen.wm_state(newstate="normal")
     canvas= Canvas(fen, width=1520, height=840, bg='white')
     canvas.pack()
 
@@ -35,7 +44,7 @@ def main():
     #mise en place de la matrice du jeu enb fonction du niveau choisi 
     init_niveau(plateau,list_piece,list_niveau[nbNiv])
 
-    resetBtn=Button(canvas,text='RESET',command=lambda:resetBtn(list_piece))
+    resetBtn=Button(canvas,text='RESET',command=lambda:reset(list_piece))
     resetBtn.place(x=10,y=10)
     fen.mainloop()
     

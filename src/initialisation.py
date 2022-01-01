@@ -23,7 +23,7 @@ def init_piece(plateau,canvas):
     #couleurs des 
     couleur=['blue','red','orange','green','purple','yellow','grey','#044','#014','#414','#042','#402']
     #création de la listes des pieces avec leur forme, couleur tag position initiale, plateau et canvas
-    pieces_list=[Piece(pieces[i],couleur[i],"f"+str(i),posIni[i][0],posIni[i][1],plateau,canvas) for i in range(12)]
+    pieces_list=[Piece(pieces[i]*(i+1),couleur[i],"f"+str(i),posIni[i][0],posIni[i][1],plateau,canvas) for i in range(12)]
     return pieces_list
 
 #initiation du niveau choisi
