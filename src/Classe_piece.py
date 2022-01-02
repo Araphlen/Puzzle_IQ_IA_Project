@@ -11,11 +11,7 @@ class Piece:
         self.couleur=couleur
         self.tag=tag
 
-
-        ####   TEST   ###
-        #self.variantes = Piece.createVariantes(tab)
-
-
+        self.variants = self.createVariants(tab)
 
         #place courante de la piece 
         self.x=x
@@ -44,17 +40,17 @@ class Piece:
         self.canvas.tag_bind(self.tag,'<Button-3>',self.turn)
         self.canvas.tag_bind(self.tag,'<Button-2>',self.mirror)
 
-    def createVariantes(self, tab):
+
+    def createVariants(cls, tab):
         variants = []
         for piece in [tab, np.fliplr(tab)]:
-            for rotation in range(4):
-                candidate = np.rot90(piece, rotation)
-                # test if candidate already in existing variants
+            for k in range(4):
+                candidate = np.rot90(piece, k)
                 for existing in variants:
                     if np.array_equal(existing, candidate):
-                        break
-                    else:
-                        variants.append(candidate)
+                        break  # candidate is equal to existing
+                else:
+                    variants.append(candidate)
         return variants
 
 
