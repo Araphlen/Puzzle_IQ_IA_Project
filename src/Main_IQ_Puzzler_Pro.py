@@ -35,7 +35,6 @@ def main():
     #initialisation de toutes les pieces du jeu
     list_piece=init_piece(plateau,canvas)
 
-    listVariants= [piece.variants for piece in list_piece ]
 
     #liste contenant la description de la position des pieces deja placées sur le plateu en fonction du niveau
     list_niveau=[[],
@@ -52,7 +51,8 @@ def main():
     resetBtn.place(x=10,y=10)
 
 
-    solveBtn = Button(canvas,text='SOLVE',command=lambda:solve(plateau.board,))
+    solveBtn = Button(canvas,text='SOLVE',command=lambda:solve(plateau.board,list_piece))
+    solveBtn.place(x=1400,y=10)
 
     fen.mainloop()
 

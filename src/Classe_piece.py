@@ -5,13 +5,14 @@ taille=70
 #classe 
 class Piece:
     #constructeur de la classe piece
-    def __init__(self,tab,couleur,tag,x,y,plateau,canvas):
+    def __init__(self,tab,shapeNb,couleur,tag,x,y,plateau,canvas):
         #forme de la piece
         self.tab=tab
         self.couleur=couleur
         self.tag=tag
+        self.shapeNb=shapeNb
 
-        self.variants = self.createVariants(tab)
+        self.variants = self.createVariants(tab,shapeNb)
 
         #place courante de la piece 
         self.x=x
@@ -41,7 +42,8 @@ class Piece:
         self.canvas.tag_bind(self.tag,'<Button-2>',self.mirror)
 
 
-    def createVariants(cls, tab):
+    def createVariants(cls, tab,shapeNb):
+        tab=tab*shapeNb
         variants = []
         for piece in [tab, np.fliplr(tab)]:
             for k in range(4):
