@@ -45,13 +45,13 @@ def main():
 
 
     #mise en place de la matrice du jeu enb fonction du niveau choisi 
-    init_niveau(plateau,list_piece,list_niveau[nbNiv])
+    listePiecesDispo = init_niveau(plateau,list_piece,list_niveau[nbNiv])
 
     resetBtn=Button(canvas,text='RESET',command=lambda:reset(list_piece))
     resetBtn.place(x=10,y=10)
 
 
-    solveBtn = Button(canvas,text='SOLVE',command=lambda:solve(plateau.board,list_piece))
+    solveBtn = Button(canvas,text='SOLVE',command=lambda:solve(plateau.board,listePiecesDispo))
     solveBtn.place(x=1400,y=10)
 
     fen.mainloop()

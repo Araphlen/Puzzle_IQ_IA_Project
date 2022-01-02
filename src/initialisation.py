@@ -28,10 +28,19 @@ def init_piece(plateau,canvas):
 
 #initiation du niveau choisi
 def init_niveau(plateau,listepiece,setup):
-    for i in setup:
-        for j in range(i[3]):
-            listepiece[i[0]].turnmat()
-        for j in range(i[4]):
-            listepiece[i[0]].mirrormat()
-        listepiece[i[0]].placeonplate(i[1],i[2])
-        listepiece[i[0]].bloquer()
+    listeNbPieceInPlace=[]
+    for placement in setup:
+        for j in range(placement[3]):
+            listepiece[placement[0]].turnmat()
+        for j in range(placement[4]):
+            listepiece[placement[0]].mirrormat()
+        listepiece[placement[0]].placeonplate(placement[1],placement[2])
+        listepiece[placement[0]].bloquer()
+        listeNbPieceInPlace.append(placement[0])
+    listePieceDispo=[]
+    listeNbPieceDispo = []
+    for i in range(12):
+        if i not in listeNbPieceInPlace:
+            listeNbPieceDispo.append(i)
+            listePieceDispo.append(listepiece[i])
+    return listePieceDispo
