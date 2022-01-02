@@ -6,13 +6,15 @@ taille=70
 class Piece:
     #constructeur de la classe piece
     def __init__(self,tab,shapeNb,couleur,tag,x,y,plateau,canvas):
+        ## attribut liées a la matrice
         #forme de la piece
         self.tab=tab
+        self.shapeNb=shapeNb
+        self.variants = self.createVariants(tab,shapeNb)
+
+        ##Attributs liées a l'affichage
         self.couleur=couleur
         self.tag=tag
-        self.shapeNb=shapeNb
-
-        self.variants = self.createVariants(tab,shapeNb)
 
         #place courante de la piece 
         self.x=x
@@ -41,16 +43,19 @@ class Piece:
         self.canvas.tag_bind(self.tag,'<Button-3>',self.turn)
         self.canvas.tag_bind(self.tag,'<Button-2>',self.mirror)
 
-
+    #fonction qui crée l'ensemble des variantes d'une piece
     def createVariants(cls, tab,shapeNb):
+        #change la valeur de 1 a shapeNb pour pouvoir observer les changement dans la résolution de l'ia
         tab=tab*shapeNb
         variants = []
+        # pour la piece et la piece inversée
         for piece in [tab, np.fliplr(tab)]:
+            # pour les 4 rotation
             for k in range(4):
                 candidate = np.rot90(piece, k)
                 for existing in variants:
                     if np.array_equal(existing, candidate):
-                        break  # candidate is equal to existing
+                        break #n'ajoute pas la variante si elle est deja presente dans le tableau
                 else:
                     variants.append(candidate)
         return variants
@@ -89,7 +94,6 @@ class Piece:
         for i in range(long):
             for j in range(long):
                 self.tab[i][j]=temp[j][long-1-i]
-        #FIX peut etre plus mettre les lignes suivantes dans turm pour que la fonction ne fasse que tourner la matrice et pas la piece 
         self.canvas.delete(self.tag)
         self.placer()
 
@@ -104,7 +108,6 @@ class Piece:
         for i in range(long):
             for j in range(long):
                 self.tab[i][j]=temp[i][long-1-j]
-        #idem que dans turnmat
         self.canvas.delete(self.tag)
         self.placer()
             

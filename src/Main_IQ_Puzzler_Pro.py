@@ -1,8 +1,11 @@
+
+
+
 from tkinter import *
 import numpy as np
 from Classe_piece import *
 from Classe_GameBoard import *
-from CSP import *
+from ia import *
 from initialisation import *
 
 #remet les pieces a leurs position initial 
@@ -44,13 +47,34 @@ def main():
 
 
 
-    #mise en place de la matrice du jeu enb fonction du niveau choisi 
+    #mise en place de la matrice du jeu enb fonction du niveau choisi retourne la liste les pieces non placées
     listePiecesDispo = init_niveau(plateau,list_piece,list_niveau[nbNiv])
 
     resetBtn=Button(canvas,text='RESET',command=lambda:reset(list_piece))
     resetBtn.place(x=10,y=10)
 
 
+    ##Test pour des matrice avec peu de pieces enlevées
+    # testBoard=np.ones((5,11))
+    # for i in range(3):
+    #     testBoard[0][i]=0
+    #     testBoard[i][2]=0
+    #
+    # for i in range(4):
+    #     testBoard[0][i+4]=0
+    #     testBoard[1][5]=0
+    #
+    # for i in range(3):
+    #     testBoard[2][4]=0
+    #     testBoard[i+1][3]=0
+    #
+    # listePiecesDispo=[list_piece[10],list_piece[3],list_piece[1]]
+    # print(testBoard)
+
+
+    print(plateau.board)
+
+    #changer plateau.board en testBoard pour faire les tests
     solveBtn = Button(canvas,text='SOLVE',command=lambda:solve(plateau.board,listePiecesDispo))
     solveBtn.place(x=1400,y=10)
 

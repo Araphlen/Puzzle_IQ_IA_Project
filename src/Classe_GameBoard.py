@@ -6,7 +6,7 @@ taille=70
 #classe du plateau de jeu 
 class GameBoard:
     
-    
+    #initialisation de la matrice 5 par 11
     def __init__(self,canvas):
         for i in range(4,15):
             for j in range(3,8):
